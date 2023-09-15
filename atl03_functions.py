@@ -49,18 +49,20 @@ import IC2tools
 
 # %% functions
 
-def downloadATL(dataversion, coords, dates, datapath, AOIname):
+def downloadATL(dataversion, coords, dates, uid, email, datapath, AOIname):
     """Usage: downloadATL(dataversion, coords, dates, datapath)
     Uses the icepyx library to download ATL03/ATL08 data of the latest version.
     ATLversion: 'ATL03' or 'ATL08'
     coords:     [lonmin, latmin, lonmax, latmax]
     dates:      start and stop dates as list of strings, ['YYYY-mm-dd', 'YYYY-mm-dd']
+    uid:        earthdata login user name
+    email:      and email
     datapath:   data folder in which a new folder for the current download will be created
     AOIname:    AOI name for the data folder, output format: dataversion_AOIname
         """
     region_S = ipx.Query(dataversion, 
                           np.array(coords), #+np.array([-0.05,-0.05,0.05,0.05]), 
-                          [datestart, datestop])
+                          dates)
                           #version='005') # specify version if you want to download something else than latest
     region_S.avail_granules(ids=True)         #get a list of granule IDs for the available granules
     region_S.earthdata_login(uid, email =email)
@@ -179,6 +181,8 @@ def llAOI2bb(lats, lons, utm=True, outfile=''):
     lons: min/max lon
     utm: convert to utm or not (from wgs84)
     outfile: if a file path is provided, the aoi polygon is written to disk as shp"""
+    
+    wgs84 = 'EPSG:4326'
     coords = [lons[0], lats[0],lons[1], lats[1]]
 
     clipshp_S_ll = IC2tools.makebboxgdf(

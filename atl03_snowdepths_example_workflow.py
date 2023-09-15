@@ -89,7 +89,7 @@ uid = '' # set your earthdata user name!
 # ATL03
 #---
 # download ATL03 (standard data, not sliderule)
-downloadATL('ATL03',coords, dates, datapath, AOIname)
+downloadATL('ATL03',coords, dates, uid, email, datapath, AOIname)
 
 
 # load into a geodataframe
@@ -111,7 +111,7 @@ else:
 # ATL08
 #---
 # download and load ATL08 data
-downloadATL('ATL08',coords, dates, datapath, AOIname)
+downloadATL('ATL08',coords, dates, uid, email, datapath, AOIname)
 gdf08 =loadATLdata('ATL08', datapath, AOIname,crs)
 
 # save to shp to view in GIS
