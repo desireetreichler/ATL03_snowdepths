@@ -116,6 +116,7 @@ def loadATLdata(dataversion, datapath, AOIname,crs=''):
             ancillary = pd.concat([a for a in ancillary_list]).pipe(pd.DataFrame)
         else: 
             gdf = IC2tools.ATL03_2_gdf(ATL_list[0], dataset_dict)
+            ancillary = None
     
     elif dataversion =='ATL08':
         dataset_dict = {'land_segments': ['delta_time', 'longitude', 'latitude', 'dem_h', 'dem_flag', 'msw_flag', 'n_seg_ph',
