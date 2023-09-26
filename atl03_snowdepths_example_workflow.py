@@ -101,7 +101,7 @@ else:
 
 # drop data according to photon quality classification and outside the AOI
 # check if the area has land ice quality flags, if not, use the standard signal confidence flag
-if sum(np.isnan(gdf.signal_conf_ph_landice)) > 0.9*len(gdf): 
+if sum(np.isnan(gdf.signal_conf_ph_landice)) > 0.9*len(gdf) or sum(gdf.signal_conf_ph_landice) < -0.9*len(gdf):  
     gdf = gdf[(gdf.signal_conf_ph>1)] 
 else: 
     gdf = gdf[(gdf.signal_conf_ph_landice>1)] 
